@@ -60,7 +60,7 @@ jobs:
           swhap build --workbench . --model P --apply \
             --curation-epoch "$EPOCH" \
             --json | tee apply.json
-          echo "candidate_ref=$(jq -r '.candidate_ref' apply.json)" >> "$GITHUB_OUTPUT"
+          echo "candidate_ref=$(jq -r '.branch_ref' apply.json)" >> "$GITHUB_OUTPUT"
 
       - name: Re-validate before publish — RED FAILS, nothing publishes
         run: |
