@@ -128,7 +128,6 @@ def test_pos_dotfiles_clean(corpus):
     r = inspect_archive(corpus["pos-dotfiles.tar"])
     assert r["accepted"] is True
     assert r["rejections"] == []
-    paths = {s for s in [".config"]}
     # dotfiles are enumerated as ordinary members (not lost)
     assert r["summary"]["files"] == 3
 
