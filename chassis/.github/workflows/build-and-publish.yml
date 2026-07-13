@@ -49,6 +49,8 @@ jobs:
           python3 -m pip install --upgrade pip pyyaml
           pip install "swhap-core @ git+https://github.com/SWHAP/swhap-automation@main#subdirectory=engine/swhap-core"
           pip install "swhap-validate @ git+https://github.com/SWHAP/swhap-automation@main#subdirectory=engine/tools/validator"
+          pip install swh.model
+
 
       - name: Extract raw_materials -> source_code
         run: python3 scripts/build_source_tree.py --recipe metadata/extraction-recipe.yaml
