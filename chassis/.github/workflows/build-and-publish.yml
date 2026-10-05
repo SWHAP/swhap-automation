@@ -49,9 +49,20 @@ jobs:
           python3 -m pip install --upgrade pip pyyaml
           pip install "swhap-core @ git+https://github.com/SWHAP/swhap-automation@main#subdirectory=engine/swhap-core"
           pip install "swhap-validate @ git+https://github.com/SWHAP/swhap-automation@main#subdirectory=engine/tools/validator"
+          pip install swh.model
+
 
       - name: Extract raw_materials -> source_code
         run: python3 scripts/build_source_tree.py --recipe metadata/extraction-recipe.yaml
+
+      - name: Commit source_code to main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add source_code/
+          git diff --staged --quiet || git commit -m "ci: update source_code"
+          git push "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" main
+        
 
       - name: Build history to a candidate ref (bit-reproducible, D4; tags created)
         id: build
@@ -60,7 +71,7 @@ jobs:
           swhap build --workbench . --model P --apply \
             --curation-epoch "$EPOCH" \
             --json | tee apply.json
-          echo "candidate_ref=$(jq -r '.candidate_ref' apply.json)" >> "$GITHUB_OUTPUT"
+          echo "candidate_ref=$(jq -r '.branch_ref' apply.json)" >> "$GITHUB_OUTPUT"
 
       - name: Re-validate before publish — RED FAILS, nothing publishes
         run: |

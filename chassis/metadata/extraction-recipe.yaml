@@ -15,5 +15,5 @@
 
 trees:
   "0.90":
-    - path: "raw_materials/0.90/example.tar.gz"
+    - path: "raw_materials/c-prolog_1.5/c-prolog.tar.gz"
       strip_components: "auto"
