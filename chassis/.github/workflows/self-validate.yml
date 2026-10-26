@@ -23,8 +23,6 @@ name: Self-validate (workbench compliance heartbeat)
 # touches the SWH token. It re-runs the gate against what is already committed.
 
 on:
-  push:
-    branches: ["**"]          # any workbench branch: main AND SourceCode
   workflow_dispatch: {}
 
 permissions:
