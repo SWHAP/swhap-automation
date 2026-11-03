@@ -96,5 +96,14 @@ jobs:
             --remote "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" \
             --curator-login "${{ github.actor }}" \
             "${EXTRA[@]}" --json
+
+      - name: Upload build report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: apply-json
+          path: apply.json
+
+            
           # Save Code Now deliberately NOT triggered here (D7 — out of MVP);
           # run archive-swh.yml explicitly after a green publish if desired.
