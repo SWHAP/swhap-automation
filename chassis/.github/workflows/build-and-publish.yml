@@ -71,6 +71,9 @@ jobs:
             --json | tee apply.json
           echo "candidate_ref=$(jq -r '.branch_ref' apply.json)" >> "$GITHUB_OUTPUT"
 
+      - name: Create local SourceCode branch from candidate
+        run: git branch -f SourceCode "${{ steps.build.outputs.candidate_ref }}"          
+
       - name: Re-validate before publish — RED FAILS, nothing publishes
         run: |
           # TODO(C-Prolog #2): resolve candidate-ref re-validation mechanics — the
