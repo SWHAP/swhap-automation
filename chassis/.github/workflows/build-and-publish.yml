@@ -72,6 +72,21 @@ jobs:
             --json | tee apply.json
           echo "candidate_ref=$(jq -r '.branch_ref' apply.json)" >> "$GITHUB_OUTPUT"
 
+      - name: Commit journal to main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add metadata/journal.jsonl
+          git commit -m "ci: save journal"
+          git push "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" main
+
+      - name: Create local SourceCode branch from candidate
+        run: |
+          git branch -f SourceCode "${{ steps.build.outputs.candidate_ref }}"
+          for t in $(jq -r '.tags[].release_tag' apply.json); do
+            git tag -f "$t" "$(jq -r --arg t "$t" '.tags[] | select(.release_tag==$t) | .tag_ref' apply.json)"
+          done
+                
       - name: Re-validate before publish — RED FAILS, nothing publishes
         run: |
           # TODO(C-Prolog #2): resolve candidate-ref re-validation mechanics — the
