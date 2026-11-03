@@ -79,6 +79,13 @@ jobs:
           # --candidate-ref option added to swhap-validate). Placeholder gate:
           swhap-validate --profile strict-P --gate publish --workdir . --report revalidate.json
 
+      - name: Upload revalidate report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: revalidate-report
+          path: revalidate.json
+
       - name: Publish (DV-1 divergence guard + supersede lineage)
         env:
           SWH_TOKEN: ${{ secrets.SWH_PERSONAL_TOKEN }}
