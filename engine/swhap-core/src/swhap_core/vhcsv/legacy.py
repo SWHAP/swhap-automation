@@ -12,7 +12,6 @@ items (§10); only an unrecognized header FAILs.
 from __future__ import annotations
 
 import re
-import unicodedata
 from datetime import datetime
 
 from .dates import parse_date

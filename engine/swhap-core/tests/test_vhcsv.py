@@ -10,7 +10,6 @@ pre-1970 negative epoch (§4.4) and the real Wild_LIFE 0.90/0.91 same-date rows.
 from __future__ import annotations
 
 import hashlib
-
 import pytest
 
 from swhap_core import errors, vhcsv
@@ -522,7 +521,6 @@ def test_wildlife_regeneration_rows_valid_and_ordered():
 
 
 def test_wildlife_rows_match_manifest_directories():
-    import json
     import os
     base = "/home/dicosmo/code/swhap-toolkit/fixtures/wildlife/manifests"
     if not os.path.isdir(base):

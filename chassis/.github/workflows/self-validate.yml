@@ -23,8 +23,6 @@ name: Self-validate (workbench compliance heartbeat)
 # touches the SWH token. It re-runs the gate against what is already committed.
 
 on:
-  push:
-    branches: ["**"]          # any workbench branch: main AND SourceCode
   workflow_dispatch: {}
 
 permissions:
@@ -41,6 +39,7 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip
           pip install "swhap-validate @ git+https://github.com/SWHAP/swhap-automation@main#subdirectory=engine/tools/validator"
+          pip install "swhap-core @ git+https://github.com/SWHAP/swhap-automation@main#subdirectory=engine/swhap-core"
 
       - name: Compliance gate (strict-P) — RED FAILS
         run: |
