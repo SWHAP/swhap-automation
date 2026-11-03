@@ -13,7 +13,6 @@ gets identical guarantees and so the verdict never depends on extraction.
 
 from __future__ import annotations
 
-import io
 import tarfile
 import zipfile
 from dataclasses import dataclass

@@ -37,6 +37,8 @@ from .model import (
     Row,
 )
 
+import re as _re
+
 # --- header (§2.1) ----------------------------------------------------------
 CANONICAL_HEADER = (
     "directory name,date,author name,author email,"
@@ -75,7 +77,7 @@ _LEGACY_TOKENS = {
 }
 
 # RFC 5322 bare addr-spec (§5.3); domain requires at least one dot.
-import re as _re
+
 
 _ADDR_SPEC = _re.compile(
     r"^[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*"

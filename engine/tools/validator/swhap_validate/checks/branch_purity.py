@@ -13,7 +13,7 @@ from ..report import FAIL, WARN, Finding
 _ROLE = "curator"
 
 # strict-P pure-default-branch allowlist (brief §9 / validator plan BP-2).
-_MAIN_ALLOW = {"README.md", "Makefile", "codemeta.json", "metadata", "raw_materials", "scripts",
+_MAIN_ALLOW = {"README.md", "Makefile", "codemeta.json", "metadata", "raw_materials", "scripts", "source_code",
                ".github"}  # codemeta.json: SWH indexes it only at the default-branch root (B5 promotion, W1).
 # .github: a provisioned workbench carries its own CI (a thin caller of the versioned
 # reusable engine, C5/S2); it is workbench infrastructure and belongs on the workbench

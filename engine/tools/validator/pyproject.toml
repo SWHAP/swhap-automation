@@ -21,3 +21,6 @@ swhap-validate = "swhap_validate.cli:main"
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["swhap_validate*"]
+
+[tool.setuptools.package-data]
+swhap_validate = ["data/*.json"]
